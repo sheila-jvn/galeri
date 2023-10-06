@@ -36,7 +36,7 @@ export default function Upload() {
   const [title, settitle] = useState<string>()
   return (
     <Container>
-      <Title ta="center" order={1} mt={20}>
+      <Title c='blue' ta="center" order={1} mt={20}>
         Upload Image
       </Title>
       <SimpleGrid mt={20} cols={2}>
@@ -84,8 +84,7 @@ export default function Upload() {
           <CheckboxGroup
             value={Value}
             onChange={(Value) => setvalue(Value)}
-            label="Select your favorite frameworks/libraries"
-            description="This is anonymous">
+            label="Select your tags">
             <Stack mt="xs">
               <Checkbox value="animals" label="Animals" />
               <Checkbox value="flowers" label="Flowers" />
@@ -94,7 +93,7 @@ export default function Upload() {
             </Stack>
           </CheckboxGroup>
           <Group>
-            <TextInput placeholder="Add New Tag" />
+            <TextInput w={'82%'} placeholder="Add New Tag" />
             <Button>Add</Button>
           </Group>
           <Button

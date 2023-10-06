@@ -45,8 +45,8 @@ export default function Edit() {
   
   return (
     <Container>
-      <Title ta="center" order={1} mt={20}>
-        Upload Image
+      <Title c='blue' ta="center" order={1} mt={20}>
+        Edit Image
       </Title>
       <SimpleGrid mt={20} cols={2}>
         <Image src={data.url}></Image>
@@ -59,8 +59,7 @@ export default function Edit() {
           <CheckboxGroup
             value={Value}
             onChange={(Value) => setvalue(Value)}
-            label="Select your favorite frameworks/libraries"
-            description="This is anonymous">
+            label="Select your tags">
             <Stack mt="xs">
               <Checkbox value="animals" label="Animals" />
               <Checkbox value="flowers" label="Flowers" />
