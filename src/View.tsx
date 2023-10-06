@@ -37,7 +37,7 @@ export default function View() {
   }, [id])
   return (
     <Container>
-      <Title ta="center" order={1} mt={20}>Upload Image</Title>
+      <Title c='blue' ta="center" order={1} mt={20}>Image Details</Title>
       <SimpleGrid mt={20} cols={2}>
         <Image src={data.url}></Image>
         <Stack>

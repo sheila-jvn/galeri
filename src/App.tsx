@@ -17,7 +17,11 @@ const array=[getRandomImageUrl(),getRandomImageUrl(),getRandomImageUrl(),getRand
 
 export default function App() {
   return (
-    <MantineProvider>
+    <MantineProvider theme={{
+    headings: {
+      fontFamily: 'Courgette, cursive',
+    }
+    }}>
       <Notifications />
       <RouterProvider router={routes}/>
     </MantineProvider>

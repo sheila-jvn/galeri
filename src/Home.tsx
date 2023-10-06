@@ -16,6 +16,7 @@ import { getRandomImageUrl } from './foto'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { GetImages } from './services'
+import classes from './Home.module.css'
 
 const array = [
   getRandomImageUrl(),
@@ -41,8 +42,8 @@ export default function Home() {
   }, [])
   return (
     <Container>
-      <Title ta="center" order={1} mt={20}>
-        MoodBoard
+      <Title c='blue' ta="center" order={1} mt={20}>
+        Mood Board
       </Title>
       <Group mt={20} justify="center" style={{ marginBottom: '2rem' }}>
         <TextInput
@@ -71,6 +72,7 @@ export default function Home() {
           .map((item) => (
             <Link to={`/${item.id}`}>
               <Image
+                classNames={{root: classes.image}}
                 style={{ borderRadius: '1rem' }}
                 mb={20}
                 src={item.url}
