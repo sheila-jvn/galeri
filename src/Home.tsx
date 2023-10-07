@@ -35,9 +35,13 @@ export default function Home() {
   const [Value, setvalue] = useState<string[]>([])
   const [search, setsearch] = useState<string>('')
   const [images, setimages] = useState<any[]>([])
+  const [tags, setTags] = useState([])
   useEffect(() => {
     GetImages().then((res) => {
       setimages(res)
+    })
+    GetTags().then((res) => {
+      setTags(res.value)
     })
   }, [])
   return (
@@ -55,7 +59,7 @@ export default function Home() {
           value={Value}
           onChange={(Value) => setvalue(Value)}
           placeholder="Select"
-          data={['Animals', 'Flowers', 'Places', 'Food']}
+          data={tags}
         />
         <Button variant="outline" component={Link} to="/upload">
           Upload Image
@@ -67,7 +71,7 @@ export default function Home() {
           .filter((item) =>
             Value.length === 0
               ? true
-              : Value.some((val) => item.tags.includes(val.toLowerCase()))
+              : Value.some((val) => item.tags.includes(val))
           )
           .map((item) => (
             <Link to={`/${item.id}`}>
