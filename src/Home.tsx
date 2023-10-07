@@ -15,7 +15,7 @@ import {
 import { getRandomImageUrl } from './foto'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { GetImages } from './services'
+import { GetImages, GetTags } from './services'
 import classes from './Home.module.css'
 
 const array = [
@@ -63,7 +63,7 @@ export default function Home() {
       </Group>
       <Box style={{ columns: '18rem', gap: '1rem' }}>
         {images
-          .filter((item) => item.title.includes(search))
+          .filter((item) => item.title.toLowerCase().includes(search.toLowerCase()))
           .filter((item) =>
             Value.length === 0
               ? true

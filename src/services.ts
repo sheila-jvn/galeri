@@ -56,3 +56,17 @@ export async function EditImage(id: string, title: string, tags: string[]) {
     tags: tags
   });
 }
+
+export async function GetTags(){
+  const snapshot = await
+  getDoc(doc(collection(firestore, "aggregation"), "tags"));
+  return snapshot.data()
+}
+
+export async function CreateTag(name: string){
+  const tags = await GetTags();
+  await updateDoc(doc(firestore, "aggregation", "tags"), {
+    value: [...tags.value, name]
+  })
+  return [...tags.value, name]
+}
