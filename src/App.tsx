@@ -19,7 +19,7 @@ export default function App() {
   return (
     <MantineProvider theme={{
     headings: {
-      fontFamily: 'Courgette, cursive',
+      fontFamily: 'Itim, cursive',
     }
     }}>
       <Notifications />

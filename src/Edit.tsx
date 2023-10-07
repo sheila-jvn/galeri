@@ -13,7 +13,7 @@ import {
 import { getRandomImageUrl } from './foto'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { EditImage, GetImage } from './services'
+import { CreateTag, EditImage, GetImage, GetTags } from './services'
 import { notifications } from '@mantine/notifications'
 
 const array = [
@@ -35,17 +35,22 @@ export default function Edit() {
   const [Value, setvalue] = useState<string[]>([])
   const [title, settitle] = useState<string>()
   const [data, setdata] = useState<any>({})
+  const [tags, setTags] = useState([])
+  const [addtag, setAddTag] = useState('')
   useEffect(() => {
     GetImage(id!).then((res) => {
       settitle(res.title)
       setvalue(res.tags)
       setdata(res)
     })
+    GetTags().then((res) => {
+      setTags(res.value)
+    })
   }, [id])
-  
+
   return (
     <Container>
-      <Title c='blue' ta="center" order={1} mt={20}>
+      <Title c="blue" ta="center" order={1} mt={20}>
         Edit Image
       </Title>
       <SimpleGrid mt={20} cols={2}>
@@ -61,25 +66,44 @@ export default function Edit() {
             onChange={(Value) => setvalue(Value)}
             label="Select your tags">
             <Stack mt="xs">
-              <Checkbox value="animals" label="Animals" />
-              <Checkbox value="flowers" label="Flowers" />
-              <Checkbox value="places" label="Places" />
-              <Checkbox value="food" label="Food" />
+              {tags.map((item) => (
+                <Checkbox key={item} value={item} label={item} />
+              ))}
             </Stack>
           </CheckboxGroup>
           <Group>
-            <TextInput w={'82%'} placeholder="Add New Tag" />
-            <Button>Add</Button>
+            <TextInput
+              value={addtag}
+              onChange={(e) => setAddTag(e.target.value)}
+              w={'82%'}
+              placeholder="Add New Tag"
+            />
+            <Button
+              onClick={() => {
+                CreateTag(addtag).then((res) => {
+                  setAddTag('')
+                  setTags(res)
+                  notifications.show({
+                    title: 'Default notification',
+                    message: 'Successfully added'
+                  })
+                })
+              }}>
+              Add
+            </Button>
           </Group>
-          <Button onClick={() => {
-            EditImage(id, title, Value).then(() => {
-              notifications.show({
-                title: 'Default notification',
-                message: 'Successfully Edited',
+          <Button
+            onClick={() => {
+              EditImage(id, title, Value).then(() => {
+                notifications.show({
+                  title: 'Default notification',
+                  message: 'Successfully Edited'
+                })
+                navigate('/')
               })
-              navigate('/')
-            })
-          }}>Save</Button>
+            }}>
+            Save
+          </Button>
         </Stack>
       </SimpleGrid>
     </Container>
